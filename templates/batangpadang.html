@@ -1,0 +1,80 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<table width="90%" class="sentiment_table" cellspacing="0" cellpadding="0">
+    <tr>
+    
+      <th>  
+          Tweet   
+      </th>
+      <th>
+          Date
+      </th>
+     
+     
+    </tr>
+  
+      {% for analyze in analysis %}
+     
+    <tr>  
+      
+      <td style="text-align: left;">  
+        {{ analyze.full_text }}
+        
+      </td>
+      <td>  
+        {{ analyze.created_at }} 
+      </td>
+     
+      
+    </tr>
+    
+    {% endfor %}
+  
+    
+  </table>
+  
+  <br>
+  <table border="1px" width="100%">
+    <tr>
+      <th>
+        Status
+      </th>
+      <th>
+        Number of tweet
+      </th>
+    </tr>
+    <tr>
+      <td>
+        Positive
+      </td>
+      <td>
+        {{ pos }}
+      </td>
+    </tr>
+    <tr>
+      <td>
+        Negative
+      </td>
+      <td>
+        {{ neg }}
+      </td>
+    </tr>
+    <tr>
+      <td>
+        Neutral
+      </td>
+      <td>
+        {{ neu }}
+      </td>
+    </tr>
+    
+  </table>
+
+   <!-- FusionCharts will render here-->
+   <div id="myFirstchart-container"></div>
+   <!-- dumping JavaScript code here -->
+   {{ output|safe }}
+
+{% endblock %}

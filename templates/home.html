@@ -1,0 +1,1332 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{% load staticfiles %}
+  
+  <table width="90%" align="center" class="center_main_table" height="100%" cellspacing="0" cellpadding="3">
+    <tr>
+      <td colspan="3"> 
+        <table class="title_perak_table" height="100%" width="100%" cellspacing="0" cellpadding="0"> 
+          <tr>
+            <td width="5%" style="padding-top:  1%; padding-bottom:1%">
+              <img src="{% static 'image/perak_logo.png' %}" width="40px" height="40px"/> 
+            </td>
+            
+            <td width="95%" style="padding-top:  1%;">
+              <h3 style="color: white;">Satisfaction Towards Perak Council</h3>
+            </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+    <tr>
+      <td width="25%"  height="100%">
+        <table class="pie_table" height="100%" width="100%" cellspacing="0" cellpadding="0"> 
+          <tr>
+            <td style="padding-top:  2%;">
+              <h4 style="color: white;">Overall Satisfaction</h4>
+              <div id="total-chart"></div> 
+            </td>
+          </tr>
+        </table>
+        <script>
+          FusionCharts.ready(function(){
+            var chartObj = new FusionCharts({
+                type: 'doughnut2d',
+                renderAt: 'total-chart',
+                containerBackgroundOpacity: '0',
+                width: '100%',
+                height: '170',
+                dataFormat: 'json',
+                creditLabel: false,
+                dataSource: {
+                    "chart": {  
+                        "bgColor": "#ffffff",   
+                        "showValues": "0",   
+                        "showLabels": '1', 
+                        "startingAngle": "130",
+                        "labelFontColor":"#FFFFFF",  
+                        "baseFontColor": "#FFFFFF",    
+                        "showLegend": "0",
+                        "centerLabelBold": "0",
+                        "showTooltip": "0",
+                        "showPercentInToolTip":'1',
+                        "toolTipBorderColor": "#666666",
+                        "toolTipBgColor": "#666666",
+                        "toolTipBgAlpha": "80",
+                        "showToolTipShadow": "1",
+                        "showBorder": "0",
+                        "chartLeftMargin": "-18",
+                        "chartTopMargin": "-4",
+                        "bgAlpha":"0",
+                        "chartRightMargin": "-18",
+                        "chartBottomMargin": "-20",                       
+                        "theme": "fusion",
+                        "paletteColors": '#86DA68,#DA7070,#D1CD4A'
+
+                    },
+                    "data": [{
+                        "label": "Positive",
+                        "value":"{{total_positive}}"
+                    }, {
+                      "label": "Negative",
+                        "value":"{{total_negative}}"
+                    },{
+                      "label": "Neutral",
+                      "value":"{{total_neutral}}"
+                  }]
+                }
+            });
+            chartObj.render();
+          });
+        </script>
+      </td>
+      <td width="75%" colspan="2" height="100%">
+        <table width="100%" align="right" height="100%" class="total_sentiment_table"  id="emotion_table" cellspacing="0" cellpadding="0">
+          <tr height="50%">
+              <td align="center" width="30%" style="padding-top: 2%;">
+                  <img src="{% static 'image/happy.png' %}" width="100px" height="100px" style="cursor: pointer;"  data-toggle="modal" data-target="#positive_sentiment"/> 
+              </td>
+              <td align="center" width="30%" style="padding-top: 2%;">
+                  <img src="{% static 'image/sad.png' %}" width="80px" height="80px" style="cursor: pointer;"  data-toggle="modal" data-target="#negative_sentiment"/> 
+              </td>
+              <td align="center" width="30%" style="padding-top: 2%;">
+                  <img src="{% static 'image/neutral.png' %}" width="80px" height="80px" style="cursor: pointer;"  data-toggle="modal" data-target="#neutral_sentiment"/> 
+              </td>
+            </tr>
+            <tr height="50%">
+              <td align="center" style="color:#86DA68;">
+                Positive<br>{{total_positive_percent}}%
+              </td>
+              <td align="center" style="color:#DA7070;">
+                Negative<br>{{total_negative_percent}}%
+              </td>
+              <td align="center" style="color:#D1CD4A;">
+                Neutral<br>{{total_neutral_percent}}%
+              </td>
+            </tr>         
+        </table>
+      </td>
+  
+    </tr>
+    <!-- <tr>
+      <td width="50%" height="100%">
+        <table class="retweet_pos_table" cellspacing="0" cellpadding="0"  height="100%" width="98%" >
+          <tr>
+            <td width="10%">
+              <img src="{% static 'image/retweet.png' %}" width="40px" height="40px"/>
+            </td>
+            <td width="90%"> 
+              <h3 style="color: #86DA68;">Most Retweeted Positive Sentiment</h3>
+            </td>
+          </tr>
+          <tr>
+            <td colspan="2" style="font-size: 18px;">
+              {% for tweet in total_positive_sentiment %}
+                {% if most_positive_tweet == tweet.retweet_count and 'RT @' not in tweet.tweet_title %}  
+                  {{tweet.tweet_title}} ({{tweet.date}})       
+                {% endif %}
+              {% endfor %}
+            </td>
+          </tr>
+        </table>
+      </td>
+      <td width="50%" height="100%">
+        <table class="retweet_neg_table" align="right" cellspacing="0" cellpadding="0"  height="100%" width="98%">
+          <tr>
+            <td width="10%">
+              <img src="{% static 'image/retweet.png' %}" width="40px" height="40px"/>
+            </td>
+            <td width="90%"> 
+              <h3 style="color: #DA7070;">Most Retweeted Negative Sentiment</h3>
+            </td>
+          </tr>
+          <tr>
+            <td colspan="2" style="font-size: 18px;">   
+              {% for tweet in total_negative_sentiment %}
+                {% if most_negative_tweet == tweet.retweet_count and 'RT @' not in tweet.tweet_title %}  
+                  {{tweet.tweet_title}} ({{tweet.date}})   
+                {% endif %}
+              {% endfor %}
+            </td>
+          </tr>
+        </table>
+      </td>
+    </tr> -->
+ 
+    <tr>
+      <td width="33.33%">
+        <table width="100%" height="100%" class="main_table" cellspacing="0" cellpadding="0" > 
+          <tr>
+            <td>
+                <div id="water-bar-chart"></div> 
+                <script>      
+                    FusionCharts.ready(function() {
+                      var chartObj = new FusionCharts({
+                        type: "column2d",
+                        renderAt: "water-bar-chart",
+                        width: "100%",
+                        height: "40%",
+                        dataFormat: "json",
+                        containerBackgroundOpacity: '0',
+                        creditLabel: false,
+                        dataSource: {
+                          chart: {
+                            caption: "Water Supply",  
+                            captionFontColor: "#FFFFFF",
+                            baseFontColor: "#FFFFFF",
+                            yAxisMaxValue: "100",
+                            yAxisMinValue: "0",
+                            xAxisNameFontColor:"#FFFFFF",
+                            yAxisNameFontColor:"#FFFFFF",
+                            xaxisname: "Satisfaction",
+                            yaxisname: "Percentage",
+                            numberSuffix: "%",
+                            bgAlpha:"0",
+                            toolTipBorderColor: "#666666",
+                            toolTipBgColor: "#666666",
+                            toolTipBgAlpha: "80",
+                            showToolTipShadow: "1",
+                            paletteColors: '#86DA68,#DA7070,#D1CD4A',
+                            theme: "fusion"
+                          },
+                          data: [
+                            {
+                              label: "Positive",
+                              value: "{{percent_positive}}",
+                              link: "JavaScript:WaterPos()"
+                            },
+                            {
+                              label: "Negative",
+                              value: "{{percent_negative}}",
+                              link: "JavaScript:WaterNeg()"
+                             
+                            },
+                            {
+                              label: "Neutral",
+                              value: "{{percent_neutral}}",
+                              link: "JavaScript:WaterNeu()"
+                            }
+                          ] }
+                        });
+                        
+                        chartObj.render();
+                    });
+                          
+                </script>
+            </td>
+          </tr>
+        </table>
+      </td>
+      <td width="33.33%">
+        <table width="100%" height="100%" class="main_table" cellspacing="0" cellpadding="0" > 
+          <tr>
+            <td>
+              <div id="bus-bar-chart"></div> 
+                <script>
+                    FusionCharts.ready(function() {
+                      var BusChart = new FusionCharts({
+                        type: "column2d",
+                        renderAt: "bus-bar-chart",
+                        width: "100%",
+                        height: "40%",
+                        dataFormat: "json",
+                        containerBackgroundOpacity: '0',
+                        creditLabel: false,
+                        dataSource: {
+                          chart: {
+                            caption: "Transportation",  
+                            captionFontColor: "#FFFFFF",
+                            showLabels: '1', 
+                            baseFontColor: "#FFFFFF",
+                            xAxisNameFontColor:"#FFFFFF",
+                            yAxisNameFontColor:"#FFFFFF",
+                            xaxisname: "Satisfaction",
+                            yaxisname: "Percentage",
+                            yAxisMaxValue: "100",
+                            yAxisMinValue: "0",
+                            numberSuffix: "%",
+                            bgAlpha:"0",
+                            toolTipBorderColor: "#666666",
+                            toolTipBgColor: "#666666",
+                            toolTipBgAlpha: "80",
+                            showToolTipShadow: "1",
+                            paletteColors: '#86DA68,#DA7070,#D1CD4A',
+                            theme: "fusion"
+                          },
+                          data: [
+                            {
+                              label: "Positive",
+                              value: "{{percent_positive_bus}}",
+                              link: "JavaScript:BusPos()"
+                            },
+                            {
+                              label: "Negative",
+                              value: "{{percent_negative_bus}}",
+                              link: "JavaScript:BusNeg()"
+                            },
+                            {
+                              label: "Neutral",
+                              value: "{{percent_neutral_bus}}",
+                              link: "JavaScript:BusNeu()"
+                            }
+                          ] }
+                        });
+                        BusChart.render();
+                    });   
+                </script>
+            </td>
+          </tr>
+        </table>
+      </td>
+      <td width="33.33%">
+        <table width="100%" height="100%" class="main_table" cellspacing="0" cellpadding="0" > 
+          <tr>
+            <td>  
+                <div id="school-bar-chart"></div> 
+                <script>
+                    FusionCharts.ready(function() {
+                      var schoolChart = new FusionCharts({
+                        type: "column2d",
+                        renderAt: "school-bar-chart",
+                        width: "100%",
+                        height: "40%",
+                        dataFormat: "json",
+                        containerBackgroundOpacity: '0',
+                        creditLabel: false,
+                        dataSource: {
+                          chart: {
+                            caption: "Education",  
+                            captionFontColor: "#FFFFFF",
+                            showLabels: '1', 
+                            baseFontColor: "#FFFFFF",
+                            xAxisNameFontColor:"#FFFFFF",
+                            yAxisNameFontColor:"#FFFFFF",
+                            xaxisname: "Satisfaction",
+                            yaxisname: "Percentage",
+                            yAxisMaxValue: "100",
+                            yAxisMinValue: "0",
+                            numberSuffix: "%",
+                            bgAlpha:"0",
+                            toolTipBorderColor: "#666666",
+                            toolTipBgColor: "#666666",
+                            toolTipBgAlpha: "80",
+                            showToolTipShadow: "1",
+                            paletteColors: '#86DA68,#DA7070,#D1CD4A',
+                            theme: "fusion"
+                          },
+                          data: [
+                            {
+                              label: "Positive",
+                              value: "{{percent_positive_school}}",
+                              link: "JavaScript:SchoolPos()"
+                            },
+                            {
+                              label: "Negative",
+                              value: "{{percent_negative_school}}",
+                              link: "JavaScript:SchoolNeg()"
+                            },
+                            {
+                              label: "Neutral",
+                              value: "{{percent_neutral_school}}",
+                              link: "JavaScript:SchoolNeu()"
+                            }
+                          ] }
+                        });
+                        schoolChart.render();
+                    });    
+                </script>
+            </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+    <tr>
+      <td width="33.33%">
+        <table width="100%" height="100%" class="main_table" cellspacing="0" cellpadding="0" > 
+          <tr>
+            <td>
+                <div id="food-bar-chart"></div> 
+                <script>      
+                    FusionCharts.ready(function() {
+                      var chartObj = new FusionCharts({
+                        type: "column2d",
+                        renderAt: "food-bar-chart",
+                        width: "100%",
+                        height: "40%",
+                        dataFormat: "json",
+                        containerBackgroundOpacity: '0',
+                        creditLabel: false,
+                        dataSource: {
+                          chart: {
+                            caption: "Food",  
+                            captionFontColor: "#FFFFFF",
+                            baseFontColor: "#FFFFFF",
+                            xAxisNameFontColor:"#FFFFFF",
+                            yAxisNameFontColor:"#FFFFFF",
+                            xaxisname: "Satisfaction",
+                            yaxisname: "Percentage",
+                            yAxisMaxValue: "100",
+                            yAxisMinValue: "0",
+                            numberSuffix: "%",
+                            bgAlpha:"0",
+                            toolTipBorderColor: "#666666",
+                            toolTipBgColor: "#666666",
+                            toolTipBgAlpha: "80",
+                            showToolTipShadow: "1",
+                            paletteColors: '#86DA68,#DA7070,#D1CD4A',
+                            theme: "fusion"
+                          },
+                          data: [
+                            {
+                              label: "Positive",
+                              value: "{{percent_positive_food}}",
+                              link: "JavaScript:FoodPos()"
+                            },
+                            {
+                              label: "Negative",
+                              value: "{{percent_negative_food}}",
+                              link: "JavaScript:FoodNeg()"
+                             
+                            },
+                            {
+                              label: "Neutral",
+                              value: "{{percent_neutral_food}}",
+                              link: "JavaScript:FoodNeu()"
+                            }
+                          ] }
+                        });
+                        
+                        chartObj.render();
+                    });
+                          
+                </script>
+            </td>
+          </tr>
+        </table>
+      </td>
+      <td width="33.33%">
+        <table width="100%" height="100%" class="main_table" cellspacing="0" cellpadding="0" > 
+          <tr>
+            <td>
+              <div id="safety-bar-chart"></div> 
+                <script>
+                    FusionCharts.ready(function() {
+                      var BusChart = new FusionCharts({
+                        type: "column2d",
+                        renderAt: "safety-bar-chart",
+                        width: "100%",
+                        height: "40%",
+                        dataFormat: "json",
+                        containerBackgroundOpacity: '0',
+                        creditLabel: false,
+                        dataSource: {
+                          chart: {
+                            caption: "Safety",  
+                            captionFontColor: "#FFFFFF",
+                            showLabels: '1', 
+                            baseFontColor: "#FFFFFF",
+                            xAxisNameFontColor:"#FFFFFF",
+                            yAxisNameFontColor:"#FFFFFF",
+                            xaxisname: "Satisfaction",
+                            yaxisname: "Percentage",
+                            yAxisMaxValue: "100",
+                            yAxisMinValue: "0",
+                            numberSuffix: "%",
+                            bgAlpha:"0",
+                            toolTipBorderColor: "#666666",
+                            toolTipBgColor: "#666666",
+                            toolTipBgAlpha: "80",
+                            showToolTipShadow: "1",
+                            paletteColors: '#86DA68,#DA7070,#D1CD4A',
+                            theme: "fusion"
+                          },
+                          data: [
+                            {
+                              label: "Positive",
+                              value: "{{percent_positive_safety}}",
+                              link: "JavaScript:SafetyPos()"
+                            },
+                            {
+                              label: "Negative",
+                              value: "{{percent_negative_safety}}",
+                              link: "JavaScript:SafetyNeg()"
+                            },
+                            {
+                              label: "Neutral",
+                              value: "{{percent_neutral_safety}}",
+                              link: "JavaScript:SafetyNeu()"
+                            }
+                          ] }
+                        });
+                        BusChart.render();
+                    });   
+                </script>
+            </td>
+          </tr>
+        </table>
+      </td>
+      <td width="33.33%">
+        <table width="100%" height="100%" class="main_table" cellspacing="0" cellpadding="0" > 
+          <tr>
+            <td>  
+                <div id="health-bar-chart"></div> 
+                <script>
+                    FusionCharts.ready(function() {
+                      var schoolChart = new FusionCharts({
+                        type: "column2d",
+                        renderAt: "health-bar-chart",
+                        width: "100%",
+                        height: "40%",
+                        dataFormat: "json",
+                        containerBackgroundOpacity: '0',
+                        creditLabel: false,
+                        dataSource: {
+                          chart: {
+                            caption: "Health Care",  
+                            captionFontColor: "#FFFFFF",
+                            showLabels: '1', 
+                            baseFontColor: "#FFFFFF",
+                            xAxisNameFontColor:"#FFFFFF",
+                            yAxisNameFontColor:"#FFFFFF",
+                            xaxisname: "Satisfaction",
+                            yaxisname: "Percentage",
+                            yAxisMaxValue: "100",
+                            yAxisMinValue: "0",
+                            numberSuffix: "%",
+                            bgAlpha:"0",
+                            toolTipBorderColor: "#666666",
+                            toolTipBgColor: "#666666",
+                            toolTipBgAlpha: "80",
+                            showToolTipShadow: "1",
+                            paletteColors: '#86DA68,#DA7070,#D1CD4A',
+                            theme: "fusion"
+                          },
+                          data: [
+                            {
+                              label: "Positive",
+                              value: "{{percent_positive_health}}",
+                              link: "JavaScript:healthPos()"
+                            },
+                            {
+                              label: "Negative",
+                              value: "{{percent_negative_health}}",
+                              link: "JavaScript:healthNeg()"
+                            },
+                            {
+                              label: "Neutral",
+                              value: "{{percent_neutral_health}}",
+                              link: "JavaScript:healthNeu()"
+                            }
+                          ] }
+                        });
+                        schoolChart.render();
+                    });    
+                </script>
+            </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+
+     
+  <!-- Total Positive Sentiment Modal Form -->
+  <div class="modal fade" id="positive_sentiment">
+    <div class="modal-dialog modal-xl">
+      <div class="modal-content">
+      
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h2 class="modal-title">Overall of Positive Satisfaction</h2>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        <!-- Modal body -->
+        <div class="modal-body">
+            <table class="table" width="100%" style="color: white;"> 
+              <thead class="thead-dark">
+                <tr>
+                  <th width="5%" style="text-align: center;">No</th>
+                  <th width="75%" style="text-align: center;">Tweets</th>
+                  <th width="20%" style="text-align: center;">Date & Time</th>
+                </tr>
+              </thead>
+              
+              <tbody>
+                {% for tweet in total_positive_sentiment %}
+                  <tr>
+                    <td>{{forloop.counter}}</td>
+                    <td>{{tweet.tweet_title}}</td>
+                    <td>{{tweet.date}}</td>
+                  </tr>
+                {% endfor %}
+              </tbody>
+              
+            </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="negative_sentiment">
+    <div class="modal-dialog modal-xl">
+      <div class="modal-content">
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h2 class="modal-title">Overall of Negative Satisfaction</h2>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>  
+        <!-- Modal body -->
+        <div class="modal-body">
+            <table class="table" width="100%" style="color: white;"> 
+              <thead class="thead-dark">
+                <tr>
+                    <th width="5%" style="text-align: center;">No</th>
+                  <th width="75%" style="text-align: center;">Tweets</th>
+                  <th width="20%" style="text-align: center;">Date & Time</th>
+                </tr>
+              </thead>        
+              <tbody>
+                {% for tweet in total_negative_sentiment %}
+                  <tr>
+                    <td>{{forloop.counter}}</td>
+                    <td>{{tweet.tweet_title}}</td>
+                    <td>{{tweet.date}}</td>
+                  </tr>
+                {% endfor %}
+              </tbody>    
+            </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="neutral_sentiment">
+    <div class="modal-dialog modal-xl">
+      <div class="modal-content">   
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h2 class="modal-title">Overall of Neutral Satisfaction</h2>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>    
+        <!-- Modal body -->
+        <div class="modal-body">
+            <table class="table" width="100%" style="color: white;"> 
+              <thead class="thead-dark">
+                <tr>
+                    <th width="5%" style="text-align: center;">No</th>
+                  <th width="75%" style="text-align: center;">Tweets</th>
+                  <th width="20%" style="text-align: center;">Date & Time</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for tweet in total_neutral_sentiment %}
+                  <tr>
+                    <td>{{forloop.counter}}</td>
+                    <td>{{tweet.tweet_title}}</td>
+                    <td>{{tweet.date}}</td>
+                  </tr>
+                {% endfor %}
+              </tbody>         
+            </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Water Positive Sentiment  -->
+  <div class="modal fade" id="positive_water_sentiment">
+    <div class="modal-dialog modal-xl">
+      <div class="modal-content">
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h2 class="modal-title">Positive Satisfaction on Water Service</h2>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>  
+        <!-- Modal body -->
+        <div class="modal-body">
+            <table class="table" width="100%" style="color: white;"> 
+              <thead class="thead-dark">
+                <tr>
+                  <th width="5%" style="text-align: center;">No</th>
+                  <th width="75%" style="text-align: center;">Tweets</th>
+                  <th width="20%" style="text-align: center;">Date & Time</th>
+                </tr>
+              </thead>        
+              <tbody>
+                {% for tweet in water_pos_analysis %}
+                  <tr>
+                    <td>{{forloop.counter}}</td>
+                    <td>{{tweet.tweet_title}}</td>
+                    <td>{{tweet.date}}</td>
+                  </tr>
+                {% endfor %}
+              </tbody>    
+            </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Water Negative Sentiment  -->
+  <div class="modal fade" id="negative_water_sentiment">
+    <div class="modal-dialog modal-xl">
+      <div class="modal-content">
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h2 class="modal-title">Negative Satisfaction on Water Service</h2>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>  
+        <!-- Modal body -->
+        <div class="modal-body">
+            <table class="table" width="100%" style="color: white;"> 
+              <thead class="thead-dark">
+                <tr>
+                    <th width="5%" style="text-align: center;">No</th>
+                  <th width="75%" style="text-align: center;">Tweets</th>
+                  <th width="20%" style="text-align: center;">Date & Time</th>
+                </tr>
+              </thead>        
+              <tbody>
+                {% for tweet in negative_analysis_water %}
+                  <tr>
+                    <td>{{forloop.counter}}</td>
+                    <td>{{tweet.tweet_title}}</td>
+                    <td>{{tweet.date}}</td>
+                  </tr>
+                {% endfor %}
+              </tbody>    
+            </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Water Neutral Sentiment  -->
+  <div class="modal fade" id="neutral_water_sentiment">
+    <div class="modal-dialog modal-xl">
+      <div class="modal-content">
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h2 class="modal-title">Neutral Satisfaction on Water Service</h2>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>  
+        <!-- Modal body -->
+        <div class="modal-body">
+            <table class="table" width="100%" style="color: white;"> 
+              <thead class="thead-dark">
+                <tr>
+                    <th width="5%" style="text-align: center;">No</th>
+                  <th width="75%" style="text-align: center;">Tweets</th>
+                  <th width="20%" style="text-align: center;">Date & Time</th>
+                </tr>
+              </thead>        
+              <tbody>
+                {% for tweet in neutral_analysis_water %}
+                  <tr>
+                    <td>{{forloop.counter}}</td>
+                    <td>{{tweet.tweet_title}}</td>
+                    <td>{{tweet.date}}</td>
+                  </tr>
+                {% endfor %}
+              </tbody>    
+            </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bus Positive Sentiment  -->
+  <div class="modal fade" id="positive_bus_sentiment">
+    <div class="modal-dialog modal-xl">
+      <div class="modal-content">
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h2 class="modal-title">Positive Satisfaction on Bus</h2>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>  
+        <!-- Modal body -->
+        <div class="modal-body">
+            <table class="table" width="100%" style="color: white;"> 
+              <thead class="thead-dark">
+                <tr>
+                    <th width="5%" style="text-align: center;">No</th>
+                  <th width="75%" style="text-align: center;">Tweets</th>
+                  <th width="20%" style="text-align: center;">Date & Time</th>
+                </tr>
+              </thead>        
+              <tbody>
+                {% for tweet in my_analysis_bus %}
+                  <tr>
+                    <td>{{forloop.counter}}</td>
+                    <td>{{tweet.tweet_title}}</td>
+                    <td>{{tweet.date}}</td>
+                  </tr>
+                {% endfor %}
+              </tbody>    
+            </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bus Negative Sentiment  -->
+  <div class="modal fade" id="negative_bus_sentiment">
+    <div class="modal-dialog modal-xl">
+      <div class="modal-content">
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h2 class="modal-title">Negative Satisfaction on Bus</h2>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>  
+        <!-- Modal body -->
+        <div class="modal-body">
+            <table class="table" width="100%" style="color: white;"> 
+              <thead class="thead-dark">
+                <tr>
+                    <th width="5%" style="text-align: center;">No</th>
+                  <th width="75%" style="text-align: center;">Tweets</th>
+                  <th width="20%" style="text-align: center;">Date & Time</th>
+                </tr>
+              </thead>        
+              <tbody>
+                {% for tweet in negative_analysis_bus %}
+                  <tr>
+                    <td>{{forloop.counter}}</td>
+                    <td>{{tweet.tweet_title}}</td>
+                    <td>{{tweet.date}}</td>
+                  </tr>
+                {% endfor %}
+              </tbody>    
+            </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bus Neutral Sentiment  -->
+  <div class="modal fade" id="neutral_bus_sentiment">
+    <div class="modal-dialog modal-xl">
+      <div class="modal-content">
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h2 class="modal-title">Neutral Satisfaction on Bus</h2>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>  
+        <!-- Modal body -->
+        <div class="modal-body">
+            <table class="table" width="100%" style="color: white;"> 
+              <thead class="thead-dark">
+                <tr>
+                    <th width="5%" style="text-align: center;">No</th>
+                  <th width="75%" style="text-align: center;">Tweets</th>
+                  <th width="20%" style="text-align: center;">Date & Time</th>
+                </tr>
+              </thead>        
+              <tbody>
+                {% for tweet in neutral_analysis_bus %}
+                  <tr>
+                    <td>{{forloop.counter}}</td>
+                    <td>{{tweet.tweet_title}}</td>
+                    <td>{{tweet.date}}</td>
+                  </tr>
+                {% endfor %}
+              </tbody>    
+            </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- School Positive Sentiment  -->
+  <div class="modal fade" id="positive_school_sentiment">
+    <div class="modal-dialog modal-xl">
+      <div class="modal-content">
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h2 class="modal-title">Positive Satisfaction on School</h2>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>  
+        <!-- Modal body -->
+        <div class="modal-body">
+            <table class="table" width="100%" style="color: white;"> 
+              <thead class="thead-dark">
+                <tr>
+                    <th width="5%" style="text-align: center;">No</th>
+                  <th width="75%" style="text-align: center;">Tweets</th>
+                  <th width="20%" style="text-align: center;">Date & Time</th>
+                </tr>
+              </thead>        
+              <tbody>
+                {% for tweet in my_analysis_school %}
+                  <tr>
+                    <td>{{forloop.counter}}</td>
+                    <td>{{tweet.tweet_title}}</td>
+                    <td>{{tweet.date}}</td>
+                  </tr>
+                {% endfor %}
+              </tbody>    
+            </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- School Negative Sentiment  -->
+  <div class="modal fade" id="negative_school_sentiment">
+    <div class="modal-dialog modal-xl">
+      <div class="modal-content">
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h2 class="modal-title">Negative Satisfaction on School</h2>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>  
+        <!-- Modal body -->
+        <div class="modal-body">
+            <table class="table" width="100%" style="color: white;"> 
+              <thead class="thead-dark">
+                <tr>
+                    <th width="5%" style="text-align: center;">No</th>
+                  <th width="75%" style="text-align: center;">Tweets</th>
+                  <th width="20%" style="text-align: center;">Date & Time</th>
+                </tr>
+              </thead>        
+              <tbody>
+                {% for tweet in negative_analysis_school %}
+                  <tr>
+                    <td>{{forloop.counter}}</td>
+                    <td>{{tweet.tweet_title}}</td>
+                    <td>{{tweet.date}}</td>
+                  </tr>
+                {% endfor %}
+              </tbody>    
+            </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- School Neutral Sentiment  -->
+  <div class="modal fade" id="neutral_school_sentiment">
+    <div class="modal-dialog modal-xl">
+      <div class="modal-content">
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h2 class="modal-title">Neutral Satisfaction on School</h2>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>  
+        <!-- Modal body -->
+        <div class="modal-body">
+            <table class="table" width="100%" style="color: white;"> 
+              <thead class="thead-dark">
+                <tr>
+                    <th width="5%" style="text-align: center;">No</th>
+                  <th width="75%" style="text-align: center;">Tweets</th>
+                  <th width="20%" style="text-align: center;">Date & Time</th>
+                </tr>
+              </thead>        
+              <tbody>
+                {% for tweet in neutral_analysis_school %}
+                  <tr>
+                    <td>{{forloop.counter}}</td>
+                    <td>{{tweet.tweet_title}}</td>
+                    <td>{{tweet.date}}</td>
+                  </tr>
+                {% endfor %}
+              </tbody>    
+            </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+   <!-- Food Positive Sentiment  -->
+   <div class="modal fade" id="positive_food_sentiment">
+    <div class="modal-dialog modal-xl">
+      <div class="modal-content">
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h2 class="modal-title">Positve Satisfaction on Food</h2>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>  
+        <!-- Modal body -->
+        <div class="modal-body">
+            <table class="table" width="100%" style="color: white;"> 
+              <thead class="thead-dark">
+                <tr>
+                    <th width="5%" style="text-align: center;">No</th>
+                  <th width="75%" style="text-align: center;">Tweets</th>
+                  <th width="20%" style="text-align: center;">Date & Time</th>
+                </tr>
+              </thead>        
+              <tbody>
+                {% for tweet in positive_analysis_food %}
+                  <tr>
+                    <td>{{forloop.counter}}</td>
+                    <td>{{tweet.tweet_title}}</td>
+                    <td>{{tweet.date}}</td>
+                  </tr>
+                {% endfor %}
+              </tbody>    
+            </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Food Negative Sentiment  -->
+  <div class="modal fade" id="negative_food_sentiment">
+    <div class="modal-dialog modal-xl">
+      <div class="modal-content">
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h2 class="modal-title">Negative Satisfaction on Food</h2>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>  
+        <!-- Modal body -->
+        <div class="modal-body">
+            <table class="table" width="100%" style="color: white;"> 
+              <thead class="thead-dark">
+                <tr>
+                    <th width="5%" style="text-align: center;">No</th>
+                  <th width="75%" style="text-align: center;">Tweets</th>
+                  <th width="20%" style="text-align: center;">Date & Time</th>
+                </tr>
+              </thead>        
+              <tbody>
+                {% for tweet in negative_analysis_food %}
+                  <tr>
+                    <td>{{forloop.counter}}</td>
+                    <td>{{tweet.tweet_title}}</td>
+                    <td>{{tweet.date}}</td>
+                  </tr>
+                {% endfor %}
+              </tbody>    
+            </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Food Neutral Sentiment  -->
+  <div class="modal fade" id="neutral_food_sentiment">
+    <div class="modal-dialog modal-xl">
+      <div class="modal-content">
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h2 class="modal-title">Neutral Satisfaction on Food</h2>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>  
+        <!-- Modal body -->
+        <div class="modal-body">
+            <table class="table" width="100%" style="color: white;"> 
+              <thead class="thead-dark">
+                <tr>
+                    <th width="5%" style="text-align: center;">No</th>
+                  <th width="75%" style="text-align: center;">Tweets</th>
+                  <th width="20%" style="text-align: center;">Date & Time</th>
+                </tr>
+              </thead>        
+              <tbody>
+                {% for tweet in neutral_analysis_food %}
+                  <tr>
+                    <td>{{forloop.counter}}</td>
+                    <td>{{tweet.tweet_title}}</td>
+                    <td>{{tweet.date}}</td>
+                  </tr>
+                {% endfor %}
+              </tbody>    
+            </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+   <!-- Safety Positive Sentiment  -->
+   <div class="modal fade" id="positive_safety_sentiment">
+    <div class="modal-dialog modal-xl">
+      <div class="modal-content">
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h2 class="modal-title">Positve Satisfaction on Safety</h2>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>  
+        <!-- Modal body -->
+        <div class="modal-body">
+            <table class="table" width="100%" style="color: white;"> 
+              <thead class="thead-dark">
+                <tr>
+                    <th width="5%" style="text-align: center;">No</th>
+                  <th width="75%" style="text-align: center;">Tweets</th>
+                  <th width="20%" style="text-align: center;">Date & Time</th>
+                </tr>
+              </thead>        
+              <tbody>
+                {% for tweet in positive_analysis_safety %}
+                  <tr>
+                    <td>{{forloop.counter}}</td>
+                    <td>{{tweet.tweet_title}}</td>
+                    <td>{{tweet.date}}</td>
+                  </tr>
+                {% endfor %}
+              </tbody>    
+            </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Safety Negative Sentiment  -->
+  <div class="modal fade" id="negative_safety_sentiment">
+    <div class="modal-dialog modal-xl">
+      <div class="modal-content">
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h2 class="modal-title">Negative Satisfaction on Safety</h2>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>  
+        <!-- Modal body -->
+        <div class="modal-body">
+            <table class="table" width="100%" style="color: white;"> 
+              <thead class="thead-dark">
+                <tr>
+                    <th width="5%" style="text-align: center;">No</th>
+                  <th width="75%" style="text-align: center;">Tweets</th>
+                  <th width="20%" style="text-align: center;">Date & Time</th>
+                </tr>
+              </thead>        
+              <tbody>
+                {% for tweet in negative_analysis_safety %}
+                  <tr>
+                    <td>{{forloop.counter}}</td>
+                    <td>{{tweet.tweet_title}}</td>
+                    <td>{{tweet.date}}</td>
+                  </tr>
+                {% endfor %}
+              </tbody>    
+            </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Safety Neutral Sentiment  -->
+  <div class="modal fade" id="neutral_safety_sentiment">
+    <div class="modal-dialog modal-xl">
+      <div class="modal-content">
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h2 class="modal-title">Neutral Satisfaction on Safety</h2>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>  
+        <!-- Modal body -->
+        <div class="modal-body">
+            <table class="table" width="100%" style="color: white;"> 
+              <thead class="thead-dark">
+                <tr>
+                    <th width="5%" style="text-align: center;">No</th>
+                  <th width="75%" style="text-align: center;">Tweets</th>
+                  <th width="20%" style="text-align: center;">Date & Time</th>
+                </tr>
+              </thead>        
+              <tbody>
+                {% for tweet in neutral_analysis_safety %}
+                  <tr>
+                    <td>{{forloop.counter}}</td>
+                    <td>{{tweet.tweet_title}}</td>
+                    <td>{{tweet.date}}</td>
+                  </tr>
+                {% endfor %}
+              </tbody>    
+            </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- health Positve Sentiment  -->
+  <div class="modal fade" id="positive_health_sentiment">
+    <div class="modal-dialog modal-xl">
+      <div class="modal-content">
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h2 class="modal-title">Positve Satisfaction on Health Care</h2>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>  
+        <!-- Modal body -->
+        <div class="modal-body">
+            <table class="table" width="100%" style="color: white;"> 
+              <thead class="thead-dark">
+                <tr>
+                    <th width="5%" style="text-align: center;">No</th>
+                  <th width="75%" style="text-align: center;">Tweets</th>
+                  <th width="20%" style="text-align: center;">Date & Time</th>
+                </tr>
+              </thead>        
+              <tbody>
+                {% for tweet in positive_analysis_health %}
+                  <tr>
+                    <td>{{forloop.counter}}</td>
+                    <td>{{tweet.tweet_title}}</td>
+                    <td>{{tweet.date}}</td>
+                  </tr>
+                {% endfor %}
+              </tbody>    
+            </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- health Negative Sentiment  -->
+  <div class="modal fade" id="negative_health_sentiment">
+    <div class="modal-dialog modal-xl">
+      <div class="modal-content">
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h2 class="modal-title">Negative Satisfaction on Health Care</h2>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>  
+        <!-- Modal body -->
+        <div class="modal-body">
+            <table class="table" width="100%" style="color: white;"> 
+              <thead class="thead-dark">
+                <tr>
+                    <th width="5%" style="text-align: center;">No</th>
+                  <th width="75%" style="text-align: center;">Tweets</th>
+                  <th width="20%" style="text-align: center;">Date & Time</th>
+                </tr>
+              </thead>        
+              <tbody>
+                {% for tweet in negative_analysis_health %}
+                  <tr>
+                    <td>{{forloop.counter}}</td>
+                    <td>{{tweet.tweet_title}}</td>
+                    <td>{{tweet.date}}</td>
+                  </tr>
+                {% endfor %}
+              </tbody>    
+            </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- health Neutral Sentiment  -->
+  <div class="modal fade" id="neutral_health_sentiment">
+    <div class="modal-dialog modal-xl">
+      <div class="modal-content">
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h2 class="modal-title">Neutral Satisfaction on Health Care</h2>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>  
+        <!-- Modal body -->
+        <div class="modal-body">
+            <table class="table" width="100%" style="color: white;"> 
+              <thead class="thead-dark">
+                <tr>
+                    <th width="5%" style="text-align: center;">No</th>
+                  <th width="75%" style="text-align: center;">Tweets</th>
+                  <th width="20%" style="text-align: center;">Date & Time</th>
+                </tr>
+              </thead>        
+              <tbody>
+                {% for tweet in neutral_analysis_health %}
+                  <tr>
+                    <td>{{forloop.counter}}</td>
+                    <td>{{tweet.tweet_title}}</td>
+                    <td>{{tweet.date}}</td>
+                  </tr>
+                {% endfor %}
+              </tbody>    
+            </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+   //Water Sentiment
+   function WaterPos(){
+    $('#positive_water_sentiment').modal('show');
+   }
+
+   function WaterNeg(){
+    $('#negative_water_sentiment').modal('show');
+   }
+
+   function WaterNeu(){
+    $('#neutral_water_sentiment').modal('show');
+   }
+
+   //Bus Sentiment
+   function BusPos(){
+    $('#positive_bus_sentiment').modal('show');
+   }
+
+   function BusNeg(){
+    $('#negative_bus_sentiment').modal('show');
+   }
+
+   function BusNeu(){
+    $('#neutral_bus_sentiment').modal('show');
+   }
+
+   //School Sentiment
+   function SchoolPos(){
+    $('#positive_school_sentiment').modal('show');
+   }
+
+   function SchoolNeg(){
+    $('#negative_school_sentiment').modal('show');
+   }
+
+   function SchoolNeu(){
+    $('#neutral_school_sentiment').modal('show');
+   }
+
+   //Food Sentiment
+   function FoodPos(){
+    $('#positive_food_sentiment').modal('show');
+   }
+
+   function FoodNeg(){
+    $('#negative_food_sentiment').modal('show');
+   }
+
+   function FoodNeu(){
+    $('#neutral_food_sentiment').modal('show');
+   }
+
+   //Safety Sentiment
+   function SafetyPos(){
+    $('#positive_safety_sentiment').modal('show');
+   }
+
+   function SafetyNeg(){
+    $('#negative_safety_sentiment').modal('show');
+   }
+
+   function SafetyNeu(){
+    $('#neutral_safety_sentiment').modal('show');
+   }
+
+   //health Sentiment
+   function healthPos(){
+    $('#positive_health_sentiment').modal('show');
+   }
+
+   function healthNeg(){
+    $('#negative_health_sentiment').modal('show');
+   }
+
+   function healthNeu(){
+    $('#neutral_health_sentiment').modal('show');
+   }
+
+
+
+  </script>
+{% endblock %}
+

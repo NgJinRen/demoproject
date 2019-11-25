@@ -1,0 +1,136 @@
+html, body{
+    border: 0;
+    margin: 0px; 
+    padding: 0px;
+    height: 100%;
+    width: 100%;
+    background-color: #709CCA !important;
+}
+.center_main_table{
+    margin-top: 1%;
+    margin-bottom: 1%;
+}
+
+.title_perak_table{
+    opacity: 0.8;
+    border-radius: 5px;
+    background-color: #414F6F;
+    font-family: 'Times New Roman', Times, serif;
+  
+}
+
+.title_perak_table td{
+    padding-left: 3%;
+    padding-right: 3%;
+}
+
+
+.sentiment_table{       
+    font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+    border-collapse: collapse;
+}
+
+.title_table td{
+    padding-left: 1.5%; 
+    font-family: 'Times New Roman', Times, serif;
+    font-style: italic;
+  
+}
+
+.pie_table{
+    opacity: 0.8;
+    border-radius: 5px;
+    background-color: #414F6F;
+    font-family: 'Times New Roman', Times, serif;
+}
+
+.pie_table td{
+    padding-left: 3%;
+    padding-right: 3%;
+    
+}
+
+.retweet_pos_table{
+    opacity: 0.8;
+    margin-top:2%;
+    color: white;
+    background-color: #414F6F;
+    font-family: 'Times New Roman', Times, serif;
+}
+
+.retweet_pos_table td{   
+    padding-top: 1%;
+    padding-bottom: 1%;
+    padding-left: 3%;
+    padding-right: 3%;
+}
+
+.retweet_neg_table{
+    opacity: 0.8;
+    margin-top:2%;
+    color: white; 
+    background-color: #414F6F;
+    font-family: 'Times New Roman', Times, serif;
+}
+
+.retweet_neg_table td{
+    padding-top: 1%;
+    padding-bottom: 1%;
+    padding-left: 3%;
+    padding-right: 3%;    
+}
+
+
+.total_sentiment_table{
+    border-radius: 5px;
+    background-color: #414F6F;
+    background-size: cover;
+    opacity: 0.8;
+    color: white;
+    font-size:27px;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+.main_table{
+    border-radius: 5px;
+    background-color: #414F6F;
+    opacity: 0.8;
+    font-family: 'Times New Roman', Times, serif;
+   
+}
+
+.main_table td{
+    padding-top: 1%;
+    padding-bottom: 1%;  
+}
+
+
+.modal-header {
+    border: none !important;
+}
+
+.modal-footer {
+    border-top: 0 none;
+}
+
+.modal-title{
+    color: white;
+    font-family: 'Times New Roman', Times, serif;
+    font-style: italic;
+    font-weight: bold;
+}
+.modal-content{
+    background-color: black !important;
+    opacity: 0.7;
+}
+
+.modal-open  .center_main_table{
+    -webkit-filter: blur(5px) ;
+    filter: blur(5px) ;
+}
+
+.modal-open  .title_table{
+    -webkit-filter: blur(5px) ;
+    filter: blur(5px) ;
+}
+
