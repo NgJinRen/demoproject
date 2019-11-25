@@ -509,8 +509,8 @@ def home(request):
     
 
 
-    most_positive_tweet = max(positive_bus_retweet+positive_school_retweet+positive_water_retweet)
-    most_negative_tweet = max(negative_bus_retweet+negative_school_retweet+negative_water_retweet)
+    most_positive_tweet = 0
+    most_negative_tweet = 0
    
     #Total of sentiment analysis
     total_positive = positive + positive_bus + positive_school + positive_food + positive_safety + positive_health
@@ -555,9 +555,9 @@ def home(request):
 
     # percentage of health 
     total_health_num = positive_health + negative_health + neutral_health
-    percent_positive_health = (positive_health / total_health_num) * 100
-    percent_negative_health = (negative_health / total_health_num) * 100
-    percent_neutral_health = (neutral_health / total_health_num) * 100
+    percent_positive_health = (positive_health / total_health_num) * 100 if total_health_num !=0 else 0
+    percent_negative_health = (negative_health / total_health_num) * 100 if total_health_num !=0 else 0
+    percent_neutral_health = (neutral_health / total_health_num) * 100 if total_health_num !=0 else 0
 
 
     # sortedArray = sorted(
